@@ -31,61 +31,31 @@
   },
   {
     "role": "user",
-    "resource": "Category",
+    "resource": "Sdfdsf",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Category",
+    "resource": "Sdfdsf",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Category",
+    "resource": "Sdfdsf",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Category",
+    "resource": "Sdfdsf",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Category",
-    "action": "read:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "create:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "update:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "delete:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
+    "resource": "Sdfdsf",
     "action": "read:any",
     "attributes": "*"
   }
