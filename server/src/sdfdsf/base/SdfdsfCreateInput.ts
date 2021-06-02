@@ -1,0 +1,2 @@
+class SdfdsfCreateInput {}
+export { SdfdsfCreateInput };
