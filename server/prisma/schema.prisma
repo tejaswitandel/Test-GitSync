@@ -9,36 +9,11 @@ generator client {
 
 model User {
   createdAt DateTime @default(now())
-  email     String?
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
-  mobile    String
   password  String
   roles     String[]
   updatedAt DateTime @updatedAt
   username  String   @unique
-}
-
-model Category {
-  categories  Category  @relation(name: "categories")
-  createdAt   DateTime  @default(now())
-  description String?
-  id          String    @id @default(cuid())
-  image       String?
-  parentId    Category? @relation(name: "categories", fields: [parentIdId], references: [id])
-  parentIdId  String?
-  tile        String?
-  updatedAt   DateTime  @updatedAt
-}
-
-model Product {
-  categoryIds String?
-  createdAt   DateTime @default(now())
-  id          String   @id @default(cuid())
-  image       String?
-  name        String?
-  size        String?
-  sku         String?
-  updatedAt   DateTime @updatedAt
 }

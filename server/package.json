@@ -1,5 +1,5 @@
 {
-  "name": "my-app-45-server",
+  "name": "my-app-44-server",
   "private": true,
   "scripts": {
     "start": "nest start",
