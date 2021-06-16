@@ -66,6 +66,6 @@ class User {
   })
   @IsString()
   @Field(() => String)
-  username!: string;
+  username!: number;
 }
 export { User };
