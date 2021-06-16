@@ -14,11 +14,18 @@ model User {
   lastName  String?
   password  String
   roles     String[]
+  ttt       String?
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
 
 model Sdfdsf {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Support {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt

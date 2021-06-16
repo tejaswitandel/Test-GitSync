@@ -8,17 +8,17 @@ import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
-import { UserService } from "../user.service";
-import { UserCreateInput } from "./UserCreateInput";
-import { UserWhereInput } from "./UserWhereInput";
-import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
-import { UserFindManyArgs } from "./UserFindManyArgs";
-import { UserUpdateInput } from "./UserUpdateInput";
-import { User } from "./User";
+import { SupportService } from "../support.service";
+import { SupportCreateInput } from "./SupportCreateInput";
+import { SupportWhereInput } from "./SupportWhereInput";
+import { SupportWhereUniqueInput } from "./SupportWhereUniqueInput";
+import { SupportFindManyArgs } from "./SupportFindManyArgs";
+import { SupportUpdateInput } from "./SupportUpdateInput";
+import { Support } from "./Support";
 
-export class UserControllerBase {
+export class SupportControllerBase {
   constructor(
-    protected readonly service: UserService,
+    protected readonly service: SupportService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
@@ -26,21 +26,21 @@ export class UserControllerBase {
   @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
   @common.Post()
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Support",
     action: "create",
     possession: "any",
   })
-  @swagger.ApiCreatedResponse({ type: User })
+  @swagger.ApiCreatedResponse({ type: Support })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(
-    @common.Body() data: UserCreateInput,
+    @common.Body() data: SupportCreateInput,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<User> {
+  ): Promise<Support> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "create",
       possession: "any",
-      resource: "User",
+      resource: "Support",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
     if (invalidAttributes.length) {
@@ -51,20 +51,15 @@ export class UserControllerBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"User"} creation is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"Support"} creation is forbidden for roles: ${roles}`
       );
     }
     return await this.service.create({
       data: data,
       select: {
         createdAt: true,
-        firstName: true,
         id: true,
-        lastName: true,
-        roles: true,
-        ttt: true,
         updatedAt: true,
-        username: true,
       },
     });
   }
@@ -73,40 +68,35 @@ export class UserControllerBase {
   @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
   @common.Get()
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Support",
     action: "read",
     possession: "any",
   })
-  @swagger.ApiOkResponse({ type: [User] })
+  @swagger.ApiOkResponse({ type: [Support] })
   @swagger.ApiForbiddenResponse()
   @swagger.ApiQuery({
-    type: () => UserFindManyArgs,
+    type: () => SupportFindManyArgs,
     style: "deepObject",
     explode: true,
   })
   async findMany(
     @common.Req() request: Request,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<User[]> {
-    const args = plainToClass(UserFindManyArgs, request.query);
+  ): Promise<Support[]> {
+    const args = plainToClass(SupportFindManyArgs, request.query);
 
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "User",
+      resource: "Support",
     });
     const results = await this.service.findMany({
       ...args,
       select: {
         createdAt: true,
-        firstName: true,
         id: true,
-        lastName: true,
-        roles: true,
-        ttt: true,
         updatedAt: true,
-        username: true,
       },
     });
     return results.map((result) => permission.filter(result));
@@ -116,34 +106,29 @@ export class UserControllerBase {
   @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
   @common.Get("/:id")
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Support",
     action: "read",
     possession: "own",
   })
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Support })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: UserWhereUniqueInput,
+    @common.Param() params: SupportWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<User | null> {
+  ): Promise<Support | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "own",
-      resource: "User",
+      resource: "Support",
     });
     const result = await this.service.findOne({
       where: params,
       select: {
         createdAt: true,
-        firstName: true,
         id: true,
-        lastName: true,
-        roles: true,
-        ttt: true,
         updatedAt: true,
-        username: true,
       },
     });
     if (result === null) {
@@ -158,24 +143,24 @@ export class UserControllerBase {
   @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
   @common.Patch("/:id")
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Support",
     action: "update",
     possession: "any",
   })
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Support })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
-    @common.Param() params: UserWhereUniqueInput,
+    @common.Param() params: SupportWhereUniqueInput,
     @common.Body()
-    data: UserUpdateInput,
+    data: SupportUpdateInput,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<User | null> {
+  ): Promise<Support | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "update",
       possession: "any",
-      resource: "User",
+      resource: "Support",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
     if (invalidAttributes.length) {
@@ -186,7 +171,7 @@ export class UserControllerBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"User"} update is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"Support"} update is forbidden for roles: ${roles}`
       );
     }
     try {
@@ -195,13 +180,8 @@ export class UserControllerBase {
         data: data,
         select: {
           createdAt: true,
-          firstName: true,
           id: true,
-          lastName: true,
-          roles: true,
-          ttt: true,
           updatedAt: true,
-          username: true,
         },
       });
     } catch (error) {
@@ -218,28 +198,23 @@ export class UserControllerBase {
   @common.UseGuards(basicAuthGuard.BasicAuthGuard, nestAccessControl.ACGuard)
   @common.Delete("/:id")
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Support",
     action: "delete",
     possession: "any",
   })
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Support })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async delete(
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<User | null> {
+    @common.Param() params: SupportWhereUniqueInput
+  ): Promise<Support | null> {
     try {
       return await this.service.delete({
         where: params,
         select: {
           createdAt: true,
-          firstName: true,
           id: true,
-          lastName: true,
-          roles: true,
-          ttt: true,
           updatedAt: true,
-          username: true,
         },
       });
     } catch (error) {

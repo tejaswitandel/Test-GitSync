@@ -14,6 +14,10 @@ import { SdfdsfList } from "./sdfdsf/SdfdsfList";
 import { SdfdsfCreate } from "./sdfdsf/SdfdsfCreate";
 import { SdfdsfEdit } from "./sdfdsf/SdfdsfEdit";
 import { SdfdsfShow } from "./sdfdsf/SdfdsfShow";
+import { SupportList } from "./support/SupportList";
+import { SupportCreate } from "./support/SupportCreate";
+import { SupportEdit } from "./support/SupportEdit";
+import { SupportShow } from "./support/SupportShow";
 
 const App = (): React.ReactElement => {
   const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -52,6 +56,13 @@ const App = (): React.ReactElement => {
           edit={SdfdsfEdit}
           create={SdfdsfCreate}
           show={SdfdsfShow}
+        />
+        <Resource
+          name="Support"
+          list={SupportList}
+          edit={SupportEdit}
+          create={SupportCreate}
+          show={SupportShow}
         />
       </Admin>
     </div>
