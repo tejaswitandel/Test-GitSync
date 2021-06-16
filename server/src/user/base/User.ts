@@ -53,6 +53,17 @@ class User {
   roles!: Array<string>;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  ttt!: string | null;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -66,6 +77,6 @@ class User {
   })
   @IsString()
   @Field(() => String)
-  username!: number;
+  username!: string;
 }
 export { User };

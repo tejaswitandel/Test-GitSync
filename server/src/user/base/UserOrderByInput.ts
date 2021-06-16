@@ -68,6 +68,15 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  ttt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["Asc", "Desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   updatedAt?: SortOrder;
 
   @ApiProperty({

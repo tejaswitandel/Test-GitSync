@@ -3,5 +3,6 @@ export type UserUpdateInput = {
   lastName?: string | null;
   password?: string;
   roles?: Array<string>;
+  ttt?: string | null;
   username?: string;
 };

@@ -1,0 +1,2 @@
+class SupportCreateInput {}
+export { SupportCreateInput };
