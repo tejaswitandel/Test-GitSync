@@ -10,14 +10,10 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { CategoryList } from "./category/CategoryList";
-import { CategoryCreate } from "./category/CategoryCreate";
-import { CategoryEdit } from "./category/CategoryEdit";
-import { CategoryShow } from "./category/CategoryShow";
-import { ProductList } from "./product/ProductList";
-import { ProductCreate } from "./product/ProductCreate";
-import { ProductEdit } from "./product/ProductEdit";
-import { ProductShow } from "./product/ProductShow";
+import { SdfdsfList } from "./sdfdsf/SdfdsfList";
+import { SdfdsfCreate } from "./sdfdsf/SdfdsfCreate";
+import { SdfdsfEdit } from "./sdfdsf/SdfdsfEdit";
+import { SdfdsfShow } from "./sdfdsf/SdfdsfShow";
 
 const App = (): React.ReactElement => {
   const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -36,7 +32,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"My app-45"}
+        title={"My app-75"}
         dataProvider={dataProvider}
         authProvider={basicHttpAuthProvider}
         theme={theme}
@@ -51,18 +47,11 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Category"
-          list={CategoryList}
-          edit={CategoryEdit}
-          create={CategoryCreate}
-          show={CategoryShow}
-        />
-        <Resource
-          name="Product"
-          list={ProductList}
-          edit={ProductEdit}
-          create={ProductCreate}
-          show={ProductShow}
+          name="Sdfdsf"
+          list={SdfdsfList}
+          edit={SdfdsfEdit}
+          create={SdfdsfCreate}
+          show={SdfdsfShow}
         />
       </Admin>
     </div>
