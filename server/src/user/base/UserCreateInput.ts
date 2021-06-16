@@ -12,17 +12,6 @@ class UserCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  email?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
   firstName?: string | null;
 
   @ApiProperty({
@@ -35,14 +24,6 @@ class UserCreateInput {
     nullable: true,
   })
   lastName?: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  mobile!: string;
 
   @ApiProperty({
     required: true,
